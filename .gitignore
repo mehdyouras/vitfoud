@@ -1,3 +1,4 @@
 node_modules
-npm-debug.log
-bin
+*.log
+assets
+index.html
