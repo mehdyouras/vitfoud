@@ -11,6 +11,8 @@ import { createActions, Store } from "reflux";
 import { actions as geolocationActions } from "./geolocation";
 import { get } from "../utils/communicator";
 
+import { isOpenWithHours } from "../utils/misc";
+
 export const actions = createActions( [
     "fetch",
 ] );
@@ -40,7 +42,10 @@ export default class PlacesStore extends Store {
             .then( ( aPlaces ) => {
                 this.setState( {
                     "fetching": false,
-                    "places": aPlaces,
+                    "places": aPlaces.map( ( oPlace ) => {
+                        oPlace.open = isOpenWithHours( oPlace.hours );
+                        return oPlace;
+                    } ),
                 } );
             } )
             .catch( ( oError ) => {
