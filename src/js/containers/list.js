@@ -7,12 +7,16 @@
  */
 
 import React from "react";
-import { Component } from "reflux";
+import { Component as Container } from "reflux";
 
 import PlacesStore, { actions as placesActions } from "../stores/places";
 import GeolocationStore from "../stores/geolocation";
 
-export default class ListPageContainer extends Component {
+import Loading from "../components/list/loading";
+import List from "../components/list/list";
+import EmptyList from "../components/list/empty";
+
+export default class ListPageContainer extends Container {
     constructor( oProps ) {
         super( oProps );
 
@@ -23,15 +27,25 @@ export default class ListPageContainer extends Component {
     componentWillMount() {
         super.componentWillMount();
 
-        console.log( "ListPageContainer.componentWillMount()" );
         placesActions.fetch();
     }
 
     render() {
-        console.log( "ListPageContainer.render( state: )", this.state );
+        let $content;
+
+        if ( this.state.fetching ) {
+            $content = ( <Loading /> );
+        }
+
+        if ( this.state.places.length ) {
+            $content = ( <List places={ this.state.places } /> );
+        } else {
+            $content = ( <EmptyList /> );
+        }
+
         return (
             <div className={ [ "page", "list" ] }>
-                <h1>{ "List page!" }</h1>
+                { $content }
             </div>
         );
     }
