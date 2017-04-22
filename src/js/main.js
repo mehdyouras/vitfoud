@@ -8,8 +8,20 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Header from "./components/header";
+
+import ListPageContainer from "./containers/list";
 
 ReactDOM.render(
-    <h1>{ "Vitfoud, in React!" }</h1>,
+    (
+        <Router>
+            <main>
+                <Header />
+                <Route path={ "/" } component={ ListPageContainer } />
+            </main>
+        </Router>
+    ),
     document.querySelector( "#app" )
 );
