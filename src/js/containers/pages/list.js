@@ -44,7 +44,7 @@ export default class ListPageContainer extends Container {
         }
 
         return (
-            <div className={ [ "page", "list" ] }>
+            <div className={ "list" }>
                 { $content }
             </div>
         );

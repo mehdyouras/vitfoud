@@ -12,6 +12,7 @@ import { Route } from "react-router-dom";
 
 import Header from "../components/header";
 import ListPageContainer from "./pages/list";
+import AboutPageContainer from "./pages/about";
 
 export default class RootContainer extends Container {
     handleBack() {
@@ -24,7 +25,8 @@ export default class RootContainer extends Container {
         return (
             <main>
                 <Header currentPath={ this.props.location.pathname } onBack={ this.handleBack.bind( this ) } />
-                <Route path="/" component={ ListPageContainer } />
+                <Route path="/" exact component={ ListPageContainer } />
+                <Route path="/about" exact component={ AboutPageContainer } />
             </main>
         );
     }
