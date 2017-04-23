@@ -76,7 +76,7 @@ gulp.task( "js-watch", function() {
             .on( "error", gutil.log.bind( gutil, "Browserify Error" ) )
             .pipe( source( "app.min.js" ) )
             .pipe( buffer() )
-            // .pipe( uglify() )
+            .pipe( uglify() )
             .pipe( gulp.dest( "assets/js" ) );
     }
 
