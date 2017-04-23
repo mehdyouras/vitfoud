@@ -13,6 +13,7 @@ import { Route } from "react-router-dom";
 import ListPageContainer from "./pages/list";
 import AboutPageContainer from "./pages/about";
 import DetailsPageContainer from "./pages/details";
+import CommentPageContainer from "./pages/comment";
 
 export default class RootContainer extends Container {
     render() {
@@ -23,6 +24,7 @@ export default class RootContainer extends Container {
                 <Route path="/" exact component={ ListPageContainer } />
                 <Route path="/about" exact component={ AboutPageContainer } />
                 <Route path="/details/:slug" exact component={ DetailsPageContainer } />
+                <Route path="/details/:slug/comment" exact component={ CommentPageContainer } />
             </div>
         );
     }
