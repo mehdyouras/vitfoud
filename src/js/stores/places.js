@@ -15,6 +15,7 @@ import { isOpenWithHours } from "../utils/misc";
 
 export const actions = createActions( [
     "fetch",
+    "fetchComments",
 ] );
 
 export default class PlacesStore extends Store {
@@ -23,21 +24,25 @@ export default class PlacesStore extends Store {
 
         this.state = {
             "fetching": false,
+            "fetchingComments": false,
             "places": [],
         };
         this.listenTo( actions.fetch, this.onFetch );
+        this.listenTo( actions.fetchComments, this.onFetchComments );
     }
 
     onFetch() {
-        this.setState( { "fetching": true } );
-        this.listenTo( geolocationActions.success, this.onGeolocationSuccess );
-        geolocationActions.locate();
+        if ( !this.state.fetching && this.state.places.length === 0 ) {
+            this.setState( { "fetching": true } );
+            this.listenTo( geolocationActions.success, this.onGeolocationSuccess );
+            geolocationActions.locate();
+        }
     }
 
     onGeolocationSuccess( { latitude, longitude } ) {
         this.stopListeningTo( geolocationActions.success );
 
-        this.setState( { "pending": true } );
+        this.setState( { "fetching": true } );
         get( "/places", { latitude, longitude } )
             .then( ( aPlaces ) => {
                 this.setState( {
@@ -56,5 +61,34 @@ export default class PlacesStore extends Store {
                     "places": [],
                 } );
             } );
+    }
+
+    onFetchComments( sPlaceSlug ) {
+        this.setState( { "fetchingComments": true } );
+        get( `/places/${ sPlaceSlug }/comments` )
+            .then( ( aComments ) => {
+                this.setState( {
+                    "fetchingComments": false,
+                    "places": this.state.places.map( ( oPlace ) => {
+                        if ( oPlace.slug === sPlaceSlug ) {
+                            oPlace.comments = aComments;
+                        }
+                        return oPlace;
+                    } ),
+                } );
+            } )
+            .catch( ( oError ) => {
+                console.error( "Fetch comments fails:", oError );
+                // NOTE: this fails silently
+                this.setState( {
+                    "fetchingComments": false,
+                    "places": this.state.places.map( ( oPlace ) => {
+                        if ( oPlace.slug === sPlaceSlug ) {
+                            oPlace.comments = [];
+                        }
+                        return oPlace;
+                    } ),
+                } );
+            } )
     }
 }
