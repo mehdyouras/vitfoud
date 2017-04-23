@@ -22,12 +22,7 @@ fRequest = function( sMethod, sPath, oData = {} ) {
     if ( sMethod === "get" ) {
         oRequest.params = oData;
     } else {
-        let oFormData = new FormData();
-
-        Object.keys( oData ).forEach( ( sKey ) => {
-            oFormData.append( sKey, oData[ sKey ] );
-        } );
-        oRequest.data = oFormData;
+        oRequest.data = oData;
     }
 
     return axios( oRequest )
