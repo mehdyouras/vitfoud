@@ -9,6 +9,8 @@
 import React from "react";
 import { Component as Container } from "reflux";
 
+import Header from "../../components/commons/header";
+
 import AboutProject from "../../components/about/project";
 import AboutMe from "../../components/about/me";
 
@@ -16,8 +18,11 @@ export default class AboutPageContainer extends Container {
     render() {
         return (
             <div className={ "page" }>
-                <AboutProject />
-                <AboutMe />
+                <Header pageTitle={ "À propos…" } backLink="/" />
+                <main className={ "content" }>
+                    <AboutProject />
+                    <AboutMe />
+                </main>
             </div>
         );
     }

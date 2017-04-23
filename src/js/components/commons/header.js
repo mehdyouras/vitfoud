@@ -1,6 +1,6 @@
 /* hepl-dw/vitfoud-client
  *
- * /src/js/components/header.js - Header component
+ * /src/js/components/commons/header.js - Header component
  *
  * coded by leny@flatLand!
  * started at 22/04/2017
@@ -21,9 +21,9 @@ export default class Header extends Component {
     renderNav() {
         let $prevLink, $aboutLink;
 
-        if ( this.props.currentPath !== "/" ) {
+        if ( this.props.backLink ) {
             $prevLink = (
-                <a href="#" onClick={ this.handleBackClick.bind( this ) }>{ "retour" }</a>
+                <Link to={ this.props.backLink }>{ "retour" }</Link>
             );
         }
 
@@ -45,6 +45,7 @@ export default class Header extends Component {
         return (
             <header>
                 <h1>{ "Vitfoud" }</h1>
+                <h2>{ this.props.pageTitle }</h2>
                 { this.renderNav() }
             </header>
         );
@@ -52,6 +53,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-    "currentPath": PropTypes.string.isRequired,
-    "onBack": PropTypes.func.isRequired,
+    "pageTitle": PropTypes.string.isRequired,
+    "backLink": PropTypes.string,
 };

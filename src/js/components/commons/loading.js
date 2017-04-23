@@ -1,6 +1,6 @@
 /* hepl-dw/vitfoud-client
  *
- * /src/js/components/list/loading.js - List Component : Loading indicator
+ * /src/js/components/commons/loading.js - List Component : Loading indicator
  *
  * coded by leny@flatLand!
  * started at 23/04/2017

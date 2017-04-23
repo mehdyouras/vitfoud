@@ -31,7 +31,7 @@ export default class ListElement extends Component {
     render() {
         return (
             <li>
-                <Link to={ `/${ this.props.slug }` }>
+                <Link to={ `/details/${ this.props.slug }` }>
                     <strong>{ this.props.name }</strong>
                     { this.renderAddress() }
                     { this.renderDistance() }

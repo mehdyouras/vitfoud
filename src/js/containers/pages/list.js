@@ -12,7 +12,8 @@ import { Component as Container } from "reflux";
 import PlacesStore, { actions as placesActions } from "../../stores/places";
 import GeolocationStore from "../../stores/geolocation";
 
-import Loading from "../../components/list/loading";
+import Header from "../../components/commons/header";
+import Loading from "../../components/commons/loading";
 import List from "../../components/list/list";
 import EmptyList from "../../components/list/empty";
 
@@ -31,21 +32,27 @@ export default class ListPageContainer extends Container {
     }
 
     render() {
-        let $content;
+        console.log( "ListPageContainer.render( state: )", this.state );
+
+        let $content, sPageTitle;
 
         if ( this.state.fetching ) {
+            sPageTitle = "chargement…";
             $content = ( <Loading /> );
-        }
-
-        if ( this.state.places.length ) {
+        } else if ( this.state.places.length ) {
+            sPageTitle = `${ this.state.places.length } endroits trouvés`;
             $content = ( <List places={ this.state.places } /> );
         } else {
+            sPageTitle = "pas de chance !";
             $content = ( <EmptyList /> );
         }
 
         return (
-            <div className={ "list" }>
-                { $content }
+            <div className={ "page" }>
+                <Header pageTitle={ sPageTitle } />
+                <main className={ "content" }>
+                    { $content }
+                </main>
             </div>
         );
     }
