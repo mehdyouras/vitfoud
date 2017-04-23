@@ -16,6 +16,8 @@ import AboutMe from "../../components/about/me";
 
 export default class AboutPageContainer extends Container {
     render() {
+        console.log( "AboutPageContainer.render( state: )", this.state );
+
         return (
             <div className={ "page" }>
                 <Header pageTitle={ "À propos…" } backLink="/" />

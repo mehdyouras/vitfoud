@@ -9,33 +9,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import Place from "../commons/place";
 import { Link } from "react-router-dom";
 
 export default class ListElement extends Component {
-    renderOpenState() {
-        if ( this.props.open ) {
-            return ( <span>{ "Ouvert" }</span> );
-        }
-
-        return ( <span>{ "Fermé" }</span> );
-    }
-
-    renderAddress() {
-        return ( <address>{ this.props.address }</address> );
-    }
-
-    renderDistance() {
-        return ( <em>{ `${ this.props.distance }m` }</em> );
-    }
-
     render() {
         return (
             <li>
                 <Link to={ `/details/${ this.props.slug }` }>
-                    <strong>{ this.props.name }</strong>
-                    { this.renderAddress() }
-                    { this.renderDistance() }
-                    { this.renderOpenState() }
+                    <Place { ...this.props } />
                 </Link>
             </li>
         );
@@ -48,9 +30,4 @@ ListElement.propTypes = {
     "name": PropTypes.string.isRequired,
     "open": PropTypes.bool,
     "slug": PropTypes.string.isRequired,
-};
-
-ListElement.defaultProps = {
-    "address": "Address inconnue",
-    "open": false,
 };
