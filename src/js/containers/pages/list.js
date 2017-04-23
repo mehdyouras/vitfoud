@@ -9,12 +9,12 @@
 import React from "react";
 import { Component as Container } from "reflux";
 
-import PlacesStore, { actions as placesActions } from "../stores/places";
-import GeolocationStore from "../stores/geolocation";
+import PlacesStore, { actions as placesActions } from "../../stores/places";
+import GeolocationStore from "../../stores/geolocation";
 
-import Loading from "../components/list/loading";
-import List from "../components/list/list";
-import EmptyList from "../components/list/empty";
+import Loading from "../../components/list/loading";
+import List from "../../components/list/list";
+import EmptyList from "../../components/list/empty";
 
 export default class ListPageContainer extends Container {
     constructor( oProps ) {

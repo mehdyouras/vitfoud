@@ -9,12 +9,49 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { Link } from "react-router-dom";
+
 export default class Header extends Component {
-    render() {
+    handleBackClick( oEvent ) {
+        oEvent.preventDefault();
+
+        this.props.onBack();
+    }
+
+    renderNav() {
+        let $prevLink, $aboutLink;
+
+        if ( this.props.currentPath !== "/" ) {
+            $prevLink = (
+                <a href="#" onClick={ this.handleBackClick.bind( this ) }>{ "retour" }</a>
+            );
+        }
+
+        $aboutLink = (
+            <Link to="/about">{ "à propos" }</Link>
+        );
+
         return (
-            <header className="header">
-                <h1>{ "Vitfoud, in React Header!" }</h1>
+            <nav>
+                { $prevLink }
+                { $aboutLink }
+            </nav>
+        );
+    }
+
+    render() {
+        console.log( "Header.render( props: )", this.props );
+
+        return (
+            <header>
+                <h1>{ "Vitfoud" }</h1>
+                { this.renderNav() }
             </header>
         );
     }
 }
+
+Header.propTypes = {
+    "currentPath": PropTypes.string.isRequired,
+    "onBack": PropTypes.func.isRequired,
+};
