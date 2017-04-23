@@ -7,6 +7,7 @@
  */
 
 var gulp = require( "gulp" ),
+    gutil = require( "gulp-util" ),
     pug = require( "gulp-pug" ),
     sass = require( "gulp-sass" ),
     autoprefixer = require( "gulp-autoprefixer" ),
@@ -15,7 +16,8 @@ var gulp = require( "gulp" ),
     source = require( "vinyl-source-stream" ),
     uglify = require( "gulp-uglify" ),
     buffer = require( "vinyl-buffer" ),
-    babelify = require( "babelify" );
+    babelify = require( "babelify" ),
+    watchify = require( "watchify" );
 
 var aLibs = Object.keys( require( "./package.json" ).dependencies );
 
@@ -55,20 +57,42 @@ gulp.task( "js-app", function() {
         .transform( babelify )
         .external( aLibs )
         .bundle()
+        .on( "error", gutil.log.bind( gutil, "Browserify Error" ) )
         .pipe( source( "app.min.js" ) )
         .pipe( buffer() )
         .pipe( uglify() )
         .pipe( gulp.dest( "assets/js" ) );
 } );
 
+gulp.task( "js-watch", function() {
+    watchify.args.debug = true;
+    var bundler = watchify( browserify( "src/js/main.js" ), watchify.args );
+
+    bundler.transform( babelify );
+
+    function rebundle() {
+        return bundler
+            .bundle()
+            .on( "error", gutil.log.bind( gutil, "Browserify Error" ) )
+            .pipe( source( "app.min.js" ) )
+            .pipe( buffer() )
+            // .pipe( uglify() )
+            .pipe( gulp.dest( "assets/js" ) );
+    }
+
+    bundler.on( "update", rebundle );
+    bundler.on( "log", gutil.log.bind( gutil ) );
+
+    return rebundle();
+} );
+
 gulp.task( "js", [ "js-libs", "js-app" ] );
 
 // --- Watch tasks
 
-gulp.task( "watch", function() {
+gulp.task( "watch", [ "js-watch" ], function() {
     gulp.watch( "src/pug/**/*.pug", [ "html" ] );
     gulp.watch( "src/sass/**/*.scss", [ "css" ] );
-    gulp.watch( "src/js/**/*.js", [ "js-app" ] );
 } );
 
 // --- Aliases
