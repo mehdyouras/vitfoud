@@ -9,13 +9,14 @@
 import { createActions, Store } from "reflux";
 
 import { actions as geolocationActions } from "./geolocation";
-import { get } from "../utils/communicator";
+import { get, post } from "../utils/communicator";
 
 import { isOpenWithHours } from "../utils/misc";
 
 export const actions = createActions( [
     "fetch",
     "fetchComments",
+    "postComment",
 ] );
 
 export default class PlacesStore extends Store {
@@ -29,6 +30,7 @@ export default class PlacesStore extends Store {
         };
         this.listenTo( actions.fetch, this.onFetch );
         this.listenTo( actions.fetchComments, this.onFetchComments );
+        this.listenTo( actions.postComment, this.onPostComment );
     }
 
     onFetch() {
@@ -55,7 +57,7 @@ export default class PlacesStore extends Store {
             } )
             .catch( ( oError ) => {
                 console.error( "Fetch fails:", oError );
-                // NOTE: this fails silently
+                // NOTE: this fails silently. bfytw.
                 this.setState( {
                     "fetching": false,
                     "places": [],
@@ -67,6 +69,7 @@ export default class PlacesStore extends Store {
         this.setState( { "fetchingComments": true } );
         get( `/places/${ sPlaceSlug }/comments` )
             .then( ( aComments ) => {
+                aComments.sort( ( a, b ) => b.date - a.date );
                 this.setState( {
                     "fetchingComments": false,
                     "places": this.state.places.map( ( oPlace ) => {
@@ -79,7 +82,7 @@ export default class PlacesStore extends Store {
             } )
             .catch( ( oError ) => {
                 console.error( "Fetch comments fails:", oError );
-                // NOTE: this fails silently
+                // NOTE: this fails silently. bfytw.
                 this.setState( {
                     "fetchingComments": false,
                     "places": this.state.places.map( ( oPlace ) => {
@@ -90,5 +93,41 @@ export default class PlacesStore extends Store {
                     } ),
                 } );
             } )
+    }
+
+    onPostComment( sPlaceSlug, oComment ) {
+        this.setState( { "fetchingComments": true } );
+        post( `/places/${ sPlaceSlug }/comments`, oComment )
+            .then( ( oComment ) => {
+                this.setState( {
+                    "fetchingComments": false,
+                    "places": this.state.places.map( ( oPlace ) => {
+                        if ( oPlace.slug === sPlaceSlug ) {
+                            if ( !oPlace.comments ) {
+                                oPlace.comments = [];
+                            }
+                            oPlace.comments.unshift( oComment );
+                        }
+                        return oPlace;
+                    } ),
+                } );
+            } )
+            .catch( ( oError ) => {
+                console.error( "Post comment fails:", oError );
+                // NOTE: this fails silently. bfytw.
+                this.setState( {
+                    "fetchingComments": false,
+                    "places": this.state.places.map( ( oPlace ) => {
+                        if ( oPlace.slug === sPlaceSlug ) {
+                            if ( !oPlace.comments ) {
+                                oPlace.comments = [];
+                            }
+                            oComment.date = Date.now();
+                            oPlace.comments.unshift( oComment );
+                        }
+                        return oPlace;
+                    } ),
+                } );
+            } );
     }
 }
