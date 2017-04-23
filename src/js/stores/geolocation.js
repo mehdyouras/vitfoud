@@ -34,7 +34,7 @@ export default class GeolocationStore extends Store {
 
     onLocate() {
         if ( this.state.coordinates && ( Date.now() - this.state.timestamp ) < CACHE_TTL ) {
-            return actions.locateSuccess( this.state.coordinates );
+            return actions.success( this.state.coordinates );
         }
 
         let fForcedSuccess = () => {
