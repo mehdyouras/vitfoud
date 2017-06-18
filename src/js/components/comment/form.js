@@ -76,7 +76,7 @@ export default class CommentForm extends Component {
                 <div className="form__field">
                     <label className="form__label" htmlFor="comment-form-rating">{ "Évaluation" }</label>
                     <div className="form__select">
-                        <select className="form__input" id="comment-form-rating" value={ this.state.rating } onChange={ this.handleRatingChange.bind( this ) }>
+                        <select id="comment-form-rating" value={ this.state.rating } onChange={ this.handleRatingChange.bind( this ) }>
                             <option value={ 0 }>{ "Bof" }</option>
                             <option value={ 1 }>{ "Mouais" }</option>
                             <option value={ 2 }>{ "Peut mieux faire" }</option>

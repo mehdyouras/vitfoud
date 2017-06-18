@@ -21,12 +21,6 @@
   &__select {
     display: flex;
     align-items: center;
-    &:before{
-      font-family: "Material Icons";
-      content: "\E5C5";
-      border-bottom: 2px solid $quick-red;
-      padding-bottom: 1px;
-    }
   }
   &__submit {
     display: inline-flex;
