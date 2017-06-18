@@ -46,6 +46,13 @@ gulp.task("fonts", function() {
         .pipe(gulp.dest("assets/fonts"));
 });
 
+// --- Task for images
+
+gulp.task("images", function() {
+    gulp.src("src/img/**", !"src/img/*.db")
+        .pipe(gulp.dest("assets/img"));
+});
+
 // --- Tasks for js
 
 gulp.task( "js-libs", function() {
@@ -100,10 +107,11 @@ gulp.task( "js", [ "js-libs", "js-app" ] );
 gulp.task( "watch", [ "js-watch" ], function() {
     gulp.watch( "src/pug/**/*.pug", [ "html" ] );
     gulp.watch( "src/sass/**/*.scss", [ "css" ] );
-    gulp.watch( "src/fonts", [ "fonts" ] );
+    gulp.watch( "src/fonts/**", [ "fonts" ] );
+    gulp.watch( "src/img/**", [ "fonts" ] );
 } );
 
 // --- Aliases
 
-gulp.task( "default", [ "html", "css", "js", "fonts" ] );
+gulp.task( "default", [ "html", "css", "js", "fonts", "images" ] );
 gulp.task( "work", [ "default", "watch" ] );
