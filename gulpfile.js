@@ -32,12 +32,19 @@ gulp.task( "html", function() {
 // --- Task for styles
 
 gulp.task( "css", function() {
-    gulp.src( "src/sass/**/*.scss" )
+    gulp.src( "src/sass/**/*.scss")
         .pipe( sass().on( "error", sass.logError ) )
         .pipe( autoprefixer() )
         .pipe( csso() )
         .pipe( gulp.dest( "assets/css" ) );
 } );
+
+// --- Task for fonts
+
+gulp.task("fonts", function() {
+    gulp.src("src/fonts/**")
+        .pipe(gulp.dest("assets/fonts"));
+});
 
 // --- Tasks for js
 
@@ -93,9 +100,10 @@ gulp.task( "js", [ "js-libs", "js-app" ] );
 gulp.task( "watch", [ "js-watch" ], function() {
     gulp.watch( "src/pug/**/*.pug", [ "html" ] );
     gulp.watch( "src/sass/**/*.scss", [ "css" ] );
+    gulp.watch( "src/fonts", [ "fonts" ] );
 } );
 
 // --- Aliases
 
-gulp.task( "default", [ "html", "css", "js" ] );
+gulp.task( "default", [ "html", "css", "js", "fonts" ] );
 gulp.task( "work", [ "default", "watch" ] );
