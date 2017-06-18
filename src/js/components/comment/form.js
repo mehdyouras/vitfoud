@@ -62,33 +62,35 @@ export default class CommentForm extends Component {
 
         if ( this.state.hasError ) {
             $error = (
-                <div>{ "Veuillez remplir tous les champs !" }</div>
+                <div className="form__error">{ "Veuillez remplir tous les champs !" }</div>
             );
         }
 
         return (
-            <form onSubmit={ this.handleSubmit.bind( this ) }>
+            <form className="form" onSubmit={ this.handleSubmit.bind( this ) }>
                 { $error }
-                <div>
-                    <label htmlFor="comment-form-name">{ "Nom" }</label>
-                    <input type="text" id="comment-form-name" onChange={ this.handleNameChange.bind( this ) } placeholder={ "Nom/Pseudo" } value={ this.state.name } />
+                <div className="form__field">
+                    <label className="form__label" htmlFor="comment-form-name">{ "Nom" }</label>
+                    <input className="form__input" type="text" id="comment-form-name" onChange={ this.handleNameChange.bind( this ) } value={ this.state.name } />
                 </div>
-                <div>
-                    <label htmlFor="comment-form-rating">{ "Évaluation" }</label>
-                    <select id="comment-form-rating" value={ this.state.rating } onChange={ this.handleRatingChange.bind( this ) }>
-                        <option value={ 0 }>{ "Bof" }</option>
-                        <option value={ 1 }>{ "Mouais" }</option>
-                        <option value={ 2 }>{ "Peut mieux faire" }</option>
-                        <option value={ 3 }>{ "Passable" }</option>
-                        <option value={ 4 }>{ "Super" }</option>
-                        <option value={ 5 }>{ "Formidable" }</option>
-                    </select>
+                <div className="form__field">
+                    <label className="form__label" htmlFor="comment-form-rating">{ "Évaluation" }</label>
+                    <div className="form__select">
+                        <select className="form__input" id="comment-form-rating" value={ this.state.rating } onChange={ this.handleRatingChange.bind( this ) }>
+                            <option value={ 0 }>{ "Bof" }</option>
+                            <option value={ 1 }>{ "Mouais" }</option>
+                            <option value={ 2 }>{ "Peut mieux faire" }</option>
+                            <option value={ 3 }>{ "Passable" }</option>
+                            <option value={ 4 }>{ "Super" }</option>
+                            <option value={ 5 }>{ "Formidable" }</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="comment-form-content">{ "Commentaire" }</label>
-                    <textarea id="comment-form-content" value={ this.state.content } onChange={ this.handleContentChange.bind( this ) } />
+                <div className="form__field">
+                    <label className="form__label"  htmlFor="comment-form-content">{ "Commentaire" }</label>
+                    <textarea className="form__input"  id="comment-form-content" value={ this.state.content } onChange={ this.handleContentChange.bind( this ) } />
                 </div>
-                <button type="submit">{ "Envoyer" }</button>
+                <button className="form__submit" type="submit">{ "Envoyer" }</button>
             </form>
         );
     }

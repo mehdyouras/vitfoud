@@ -1,0 +1,9 @@
+.about {
+  &__quick {
+    margin: $inuit-global-spacing-unit $inuit-global-spacing-unit-small 0;
+    border-bottom: 1px solid $light-grey;
+  }
+  &__me {
+    margin: $inuit-global-spacing-unit $inuit-global-spacing-unit-small;
+  }
+}

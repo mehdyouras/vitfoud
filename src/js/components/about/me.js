@@ -11,7 +11,7 @@ import React, { Component } from "react";
 export default class AboutMe extends Component {
     render() {
         return (
-            <div>{ "About me…" }</div>
+            <div className="about__me">{ "Je suis un jeune développeur web de Huy en Belgique. Je suis un passionné du développement backend propre, clair et documenté." }</div>
         );
     }
 }

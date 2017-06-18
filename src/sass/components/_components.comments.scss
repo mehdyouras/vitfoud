@@ -1,0 +1,78 @@
+.comments {
+  padding: 0 $inuit-global-spacing-unit-small;
+  &__title {
+    color: $quick-red;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $inuit-global-spacing-unit-small;
+    border-radius: 2px;
+    padding: $inuit-global-spacing-unit-tiny;
+    &:nth-child(2n+1) {
+      background: $light-grey;
+    }
+  }
+  &__author {
+    color: $quick-red;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: $inuit-global-spacing-unit-tiny;
+  }
+  &__content {
+    padding-left: $inuit-global-spacing-unit-small;
+    border-left: 2px solid $quick-red;
+    margin-bottom: $inuit-global-spacing-unit;
+  }
+  &__add {
+    position: fixed;
+    bottom: $inuit-global-spacing-unit;
+    right: $inuit-global-spacing-unit-small;
+    &:before {
+      font-family: "Material Icons";
+      content: "\E0C9";
+      position: absolute;
+      top: 0.15em;
+      right: 0.36em;
+      color: white;
+      font-size: 1.8em;
+    }
+    &:after {
+      background: $quick-red;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: block;
+      content: '';
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+  }
+
+  &__rating {
+    margin-left: auto;
+    margin-bottom: $inuit-global-spacing-unit;
+    &:before {
+      font-family: "Material Icons";
+      width: 24px;
+      color: $quick-red;
+    }
+    &_1:before {
+      content: "\E885";;
+    }
+    &_2:before {
+      content: "\E885 \E885";
+    }
+    &_3:before {
+      content: "\E885 \E885 \E885";
+    }
+    &_4:before {
+      content: "\E885 \E885 \E885 \E885";
+    }
+    &_5:before {
+      content: "\E885 \E885 \E885 \E885 \E885";
+    }
+  }
+}

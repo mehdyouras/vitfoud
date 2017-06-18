@@ -1,0 +1,53 @@
+.form {
+  padding: $inuit-global-spacing-unit $inuit-global-spacing-unit-small;
+  display: flex;
+  flex-direction: column;
+  &__label {
+    margin-bottom: $inuit-global-spacing-unit-small;
+  }
+  &__input {
+    border: 0;
+    border-bottom: 2px solid $quick-red;
+    outline-color: $quick-red;
+    border-radius: 0;
+    background: 0;
+    padding-bottom: $inuit-global-spacing-unit-tiny;
+  }
+  &__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $inuit-global-spacing-unit;
+  }
+  &__select {
+    display: flex;
+    align-items: center;
+    &:before{
+      font-family: "Material Icons";
+      content: "\E5C5";
+      border-bottom: 2px solid $quick-red;
+      padding-bottom: 1px;
+    }
+  }
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $quick-red;
+    border: 0;
+    color: white;
+    padding: $inuit-global-spacing-unit-small;
+    &:before {
+      font-family: "Material Icons";
+      content: "\E163";
+      //vertical-align: baseline;
+      margin-right: $inuit-global-spacing-unit-small;
+    }
+  }
+  &__error {
+    color: $quick-red;
+    text-align: center;
+    padding: $inuit-global-spacing-unit-small;
+    border: 1px solid $quick-red;
+    margin-bottom: $inuit-global-spacing-unit;
+  }
+}
