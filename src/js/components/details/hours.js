@@ -16,17 +16,17 @@ const DAY_NAMES = [ "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi",
 export default class PlaceHours extends Component {
     renderOpenState() {
         if ( this.props.open ) {
-            return ( <p>{ "Cet endroit est actuellement ouvert" }</p> );
+            return ( <p className="hours__isOpen hours__isOpen_open">{ "Cet endroit est actuellement ouvert" }</p> );
         }
 
-        return ( <p>{ "Cet endroit est actuellement fermé." }</p> );
+        return ( <p className="hours__isOpen hours__isOpen_close">{ "Cet endroit est actuellement fermé." }</p> );
     }
 
     renderDay( [ iOpenHour, iCloseHour ], iDayIndex ) {
         return (
-            <li key={ iDayIndex }>
-                <strong>{ `${ DAY_NAMES[ iDayIndex ] } : ` }</strong>
-                <span>{ `${ hoursAsString( iOpenHour ) } - ${ hoursAsString( iCloseHour ) }` }</span>
+            <li className="hours__day" key={ iDayIndex }>
+                <strong className="hours__name">{ `${ DAY_NAMES[ iDayIndex ] }  ` }</strong>
+                <span className="hours__hour">{ `${ hoursAsString( iOpenHour ) } - ${ hoursAsString( iCloseHour ) }` }</span>
             </li>
         );
     }
@@ -41,7 +41,7 @@ export default class PlaceHours extends Component {
         return (
             <div>
                 { this.renderOpenState() }
-                <ul>
+                <ul className="o-list-bare">
                     { aHours.map( this.renderDay.bind( this ) ) }
                 </ul>
             </div>

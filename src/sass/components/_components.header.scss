@@ -11,7 +11,8 @@
   &__subtitle {
     text-align: center;
     font-size: $inuit-font-size-h3;
-    background: #e8e8e8;
+    background: $light-grey;
+    margin-bottom: 0;
   }
   &__logo {
     height: inuit-rem(100px);

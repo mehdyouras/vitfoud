@@ -12,10 +12,10 @@ import PropTypes from "prop-types";
 export default class PlaceInfo extends Component {
     render() {
         return (
-            <div>
-                <h3>{ this.props.name }</h3>
+            <div className="info">
+                <h3 className="u-hidden-visually">{ this.props.name }</h3>
                 <address>{ this.props.address }</address>
-                <p>
+                <p className="info__distance">
                     <span>{ "Distance : " }</span>
                     <strong>{ `${ this.props.distance }m` }</strong>
                 </p>

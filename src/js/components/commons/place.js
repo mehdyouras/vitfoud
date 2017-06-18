@@ -18,6 +18,13 @@ export default class Place extends Component {
         return ( <span>{ "Fermé" }</span> );
     }
 
+    renderOpen() {
+        if(this.props.open) {
+            return "place_open";
+        }
+        return "place_close";
+    }
+
     renderAddress() {
         return ( <address>{ this.props.address }</address> );
     }
@@ -28,9 +35,9 @@ export default class Place extends Component {
 
     render() {
         return (
-            <div className="place">
+            <div className={"place " + this.renderOpen()}>
                 <div className="place__address">
-                    <strong>{ this.props.name }</strong>
+                    <strong className="place__name">{ this.props.name }</strong>
                     { this.renderAddress() }
                 </div>
                 <div className="place__details">

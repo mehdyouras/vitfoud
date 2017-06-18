@@ -1,0 +1,21 @@
+.hours {
+  &__isOpen {
+    text-align: center;
+    margin-top: 0;
+    padding: $inuit-global-spacing-unit-small 0;
+    &_close {
+      background: $quick-red;
+    }
+    &_open {
+      background: $green;
+    }
+  }
+  &__day {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $inuit-global-spacing-unit-small;
+    &:nth-child(2n+1) {
+      background: $light-grey;
+    }
+  }
+}

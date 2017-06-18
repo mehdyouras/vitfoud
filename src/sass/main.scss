@@ -82,6 +82,8 @@
 // COLORS
 
 $quick-red : #D41C3A;
+$light-grey : #e8e8e8;
+$green : #8BC34A;
 
 
 // TOOLS
@@ -109,6 +111,8 @@ body {display: flex; flex-direction: column;} // STICKY FOOTER
 @import "elements/elements.headings";
 @import "elements/elements.images";
 @import "elements/elements.tables";
+@import "elements/elements.anchors";
+@import "elements/elements.address";
 
 
 
@@ -141,6 +145,10 @@ body {display: flex; flex-direction: column;} // STICKY FOOTER
 @import "components/components.header";
 @import "components/components.content";
 @import "components/components.loading";
+@import "components/components.place";
+@import "components/components.info";
+@import "components/components.hours";
+@import "components/components.map";
 
 
 

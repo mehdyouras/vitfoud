@@ -1,0 +1,23 @@
+.place {
+  padding: $inuit-global-spacing-unit $inuit-global-spacing-unit-small;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  //align-items: flex-start;
+  &__details {
+    display: flex;
+    flex-direction: column;
+    margin-right: $inuit-global-spacing-unit;
+  }
+  &__name {
+    color: $quick-red;
+  }
+  &_open {
+    border-left: 4px solid $green;
+    color: black;
+  }
+  &_close {
+    border-left: 4px solid $quick-red;
+    color: #737373;
+  }
+}
