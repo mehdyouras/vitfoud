@@ -138,10 +138,13 @@ body {display: flex; flex-direction: column;} // STICKY FOOTER
 // COMPONENTS
 //
 // Build and include your project’s UI Compoments here.
+@import "components/components.header";
+@import "components/components.content";
+@import "components/components.loading";
 
 
 
-// UTILITIES
+ // UTILITIES
 @import "utilities/utilities.clearfix";
 
 $inuit-offsets: true;

@@ -23,16 +23,16 @@ export default class Header extends Component {
 
         if ( this.props.backLink ) {
             $prevLink = (
-                <Link to={ this.props.backLink }>{ "retour" }</Link>
+                <Link className={"nav__item" + " nav__item_return"} to={ this.props.backLink }><span className="u-hidden-visually">{ "retour" }</span></Link>
             );
         }
 
         $aboutLink = (
-            <Link to="/about">{ "à propos" }</Link>
+            <Link className={"nav__item" + " nav__item_about"}  to="/about"><span className="u-hidden-visually">{ "à propos" }</span></Link>
         );
 
         return (
-            <nav>
+            <nav className="nav">
                 { $prevLink }
                 { $aboutLink }
             </nav>
@@ -43,10 +43,15 @@ export default class Header extends Component {
         console.log( "Header.render( props: )", this.props );
 
         return (
-            <header>
-                <h1>{ "Vitfoud" }</h1>
-                <h2>{ this.props.pageTitle }</h2>
-                { this.renderNav() }
+            <header className="header">
+                <div className="fixedWrapper">
+                    <h1 className="header__title">
+                        <span className="u-hidden-visually">{ "Vitfoud" }</span>
+                        <img className="header__logo" src="assets/img/logo.svg" alt="Logo de Quick"/>
+                    </h1>
+                    { this.renderNav() }
+                </div>
+                <h2 className="header__subtitle">{ this.props.pageTitle }</h2>
             </header>
         );
     }

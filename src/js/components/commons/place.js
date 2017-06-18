@@ -28,11 +28,16 @@ export default class Place extends Component {
 
     render() {
         return (
-            <div>
-                <strong>{ this.props.name }</strong>
-                { this.renderAddress() }
-                { this.renderDistance() }
-                { this.renderOpenState() }
+            <div className="place">
+                <div className="place__address">
+                    <strong>{ this.props.name }</strong>
+                    { this.renderAddress() }
+                </div>
+                <div className="place__details">
+                    { this.renderDistance() }
+                    { this.renderOpenState() }
+                </div>
+
             </div>
         );
     }

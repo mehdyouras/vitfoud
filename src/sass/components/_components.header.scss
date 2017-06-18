@@ -1,0 +1,47 @@
+.fixedWrapper{
+  color: white;
+  background: $quick-red;
+}
+
+.header {
+  &__title {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  &__subtitle {
+    text-align: center;
+    font-size: $inuit-font-size-h3;
+    background: #e8e8e8;
+  }
+  &__logo {
+    height: inuit-rem(100px);
+    padding: $inuit-global-spacing-unit-small 0;
+  }
+}
+
+.nav {
+  //background: darken($quick-red, 2);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: $inuit-global-spacing-unit-small;
+  &__item {
+    text-decoration: none;
+    color: white;
+    &:before {
+      font-size: $inuit-font-size-h2;
+      font-family: "Material Icons";
+    }
+    &_return {
+      margin-right: auto;
+      &:before {
+        content:"\E5C4";
+      }
+    }
+    &_about {
+      &:before {
+        content: "\E887";
+      }
+    }
+  }
+}
